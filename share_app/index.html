@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com/gsi/client; connect-src 'self' https://tasks.googleapis.com https://accounts.google.com; frame-src https://accounts.google.com; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; img-src 'self' data: https://*.googleusercontent.com; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#1a73e8">
+  <title>D-Day</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon192.png">
+  <link rel="apple-touch-icon" href="icon192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="icon192.png" alt="" width="28" height="28">
+    <h1>D-Day</h1>
+    <span id="net" class="pill" hidden>offline</span>
+  </header>
+  <main>
+    <!-- First run: needs the setup link from the D-Day dashboard -->
+    <section id="v-setup" hidden>
+      <h2>Set up</h2>
+      <p>Open the setup link from the D-Day dashboard on your PC (Settings → Share from phone → scan the QR code).</p>
+    </section>
+
+    <!-- Compose / shared message -->
+    <section id="v-compose" hidden>
+      <label for="msg" id="msg-label">Message</label>
+      <textarea id="msg" rows="8" placeholder="Paste or share a message with a deadline"></textarea>
+      <button id="send" class="primary">Send to D-Day</button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <p id="queue" class="muted small" hidden></p>
+    </section>
+
+    <!-- Sent -->
+    <section id="v-done" hidden>
+      <div class="big">✓</div>
+      <h2 id="done-title">Sent to D-Day</h2>
+      <p class="muted" id="done-text">Your PC will pick it up within a minute (when it's on) and show it in the D-Day inbox.</p>
+      <button id="close" class="primary">Done</button>
+      <button id="another" class="link">Send another</button>
+    </section>
+
+    <details id="help" class="muted small">
+      <summary>How to use</summary>
+      <ol>
+        <li>Install: in Chrome's ⋮ menu choose <b>Add to Home screen</b> / <b>Install app</b>.</li>
+        <li>In WhatsApp (or SMS, Gmail…), long-press a message → <b>Share</b> → <b>D-Day</b> → <b>Send</b>.</li>
+        <li>It goes to your "D-Day" list in Google Tasks; your PC reads it with its local model. Nothing is added to your calendar until you confirm on the PC.</li>
+      </ol>
+      <p>Google sign-in is used only to add the message to your own Google Tasks.
+        <button id="signout" class="link small">Sign out</button></p>
+    </details>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
