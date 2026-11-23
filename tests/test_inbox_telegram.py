@@ -466,12 +466,13 @@ CID = "1008780003887-abc123def456.apps.googleusercontent.com"
 def test_share_setup_link_and_qr(app_client):
     r = call(app_client, "get", "/api/share")
     assert r.get_json()["setup_url"] is None
-    assert call(app_client, "get", "/api/share/qr.svg").status_code == 404
+    assert app_client.get("/app/share-qr.svg", base_url="http://127.0.0.1:8765").status_code == 404
     bad = call(app_client, "post", "/api/share", {"share_client_id": "not-a-client-id"})
     assert bad.status_code == 400
     r = call(app_client, "post", "/api/share", {"share_client_id": CID})
     info = r.get_json()
     assert info["setup_url"] == f"https://mohitahujaa.github.io/D-Day/#setup={CID}"
     assert info["app_origin"] == "https://mohitahujaa.github.io"
-    qr = app_client.get("/api/share/qr.svg", headers=APP_HEADERS, base_url="http://127.0.0.1:8765")
+    # loaded like an <img>: no X-DDay-Client header, no Origin
+    qr = app_client.get("/app/share-qr.svg", base_url="http://127.0.0.1:8765")
     assert qr.status_code == 200 and qr.mimetype == "image/svg+xml" and b"<svg" in qr.data

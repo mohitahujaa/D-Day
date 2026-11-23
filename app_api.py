@@ -213,7 +213,7 @@ def register(app: Flask, services: Services, calendar, error: Callable, ledger_p
             return error("invalid_setting", str(exc), 400)
         return jsonify({"ok": True, **share_info()})
 
-    @app.get("/api/share/qr.svg")
+    @app.get("/app/share-qr.svg")  # an <img> can't send X-DDay-Client, so not under /api/
     def share_qr():
         info = share_info()
         if not info["setup_url"]:

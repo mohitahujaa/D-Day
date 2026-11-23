@@ -358,7 +358,7 @@ async function loadShare() {
     el("ol", { class: "steps small" },
       el("li", {}, "On your phone, scan this code (or open the link below) in ", el("strong", { text: "Chrome" }), ":"),
     ),
-    el("img", { class: "qr", src: `/api/share/qr.svg?v=${encodeURIComponent(info.client_id)}`, alt: "QR code with your D-Day share app setup link" }),
+    el("img", { class: "qr", src: `/app/share-qr.svg?v=${encodeURIComponent(info.client_id)}`, alt: "QR code with your D-Day share app setup link" }),
     el("p", { class: "mono", text: info.setup_url }),
     el("ol", { class: "steps small", start: "2" },
       el("li", {}, "In Chrome's ⋮ menu tap ", el("strong", { text: "Add to Home screen → Install" }), "."),
