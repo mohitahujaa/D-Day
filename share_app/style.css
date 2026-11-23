@@ -27,5 +27,16 @@ button.link { border: none; background: none; color: var(--accent); padding: 8px
 .pill { font-size: 12px; padding: 2px 8px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
 .big { font-size: 56px; color: var(--ok); text-align: center; }
 #v-done { text-align: center; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+.row button { padding: 8px 14px; }
+.switch { display: inline-flex; align-items: center; gap: 8px; margin: 0; color: var(--fg); font-size: 14px; cursor: pointer; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch .track { width: 40px; height: 22px; border-radius: 11px; background: var(--line); position: relative; transition: background .15s; }
+.switch .knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.switch input:checked + .track { background: #1e8e3e; }
+.switch input:checked + .track .knob { transform: translateX(18px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+.countdown { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 10px 12px;
+  border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
 details { margin-top: 28px; }
 details ol { padding-left: 20px; }

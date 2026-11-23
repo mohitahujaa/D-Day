@@ -88,6 +88,12 @@ Google Tasks list from anywhere (queued on the phone if you're offline). Setup, 
    (Settings → Share from phone).
 4. Scan the QR code shown there with your phone, open it in Chrome, then ⋮ → **Add to Home screen → Install**.
 
+WhatsApp doesn't let other apps receive text messages, so it has no Share → D-Day option. Turn on
+**Copy mode** in the phone app instead: copy the message in WhatsApp, then open D-Day and it sends the copied
+text by itself (after a 3-second countdown you can cancel; never the same text twice). Android doesn't let apps
+read the clipboard in the background, so D-Day reads it only when you open it. With Copy mode off, the app only
+sends what you share, paste or type.
+
 **Phone setup with Google Tasks (once, about 3 minutes):**
 1. Google Cloud Console → your D-Day project → APIs & Services → Library → **Google Tasks API** → **Enable**.
 2. Dashboard → Settings → Phone → **Reconnect Google**, and tick **Google Tasks** on the permission screen.

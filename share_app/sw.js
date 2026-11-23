@@ -1,5 +1,5 @@
 // Makes the share app installable and lets it open offline (messages are then queued).
-const CACHE = "dday-share-v1";
+const CACHE = "dday-share-v2";
 const SHELL = ["./", "./index.html", "./app.js", "./style.css", "./manifest.webmanifest", "./icon192.png", "./icon512.png"];
 
 self.addEventListener("install", (e) => {

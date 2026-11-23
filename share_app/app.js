@@ -185,6 +185,79 @@ async function flushQueue(token) {
   showQueue();
 }
 
+// ------------------------------------------------------------------ copy mode (clipboard)
+// Android doesn't let any app read the clipboard in the background, so copy mode
+// reads it when D-Day is opened (with the user's one-time permission).
+const MIN_CLIP_CHARS = 6;
+let autoTimer = null;
+
+function hashText(text) {
+  let h = 5381;
+  for (let i = 0; i < text.length; i++) h = ((h * 33) ^ text.charCodeAt(i)) >>> 0;
+  return h.toString(16) + ":" + text.length;
+}
+
+async function readClipboard() {
+  if (!navigator.clipboard || !navigator.clipboard.readText) return null;
+  try {
+    return (await navigator.clipboard.readText() || "").trim();
+  } catch {
+    return null;  // permission not given yet, or the page isn't focused
+  }
+}
+
+function cancelAuto(message) {
+  clearTimeout(autoTimer);
+  autoTimer = null;
+  $("countdown").hidden = true;
+  if (message) status(message);
+}
+
+async function checkClipboard() {
+  if (!store.get("copyMode") || autoTimer || document.hidden || $("v-compose").hidden) return;
+  if ($("msg").value.trim()) return;  // a shared, typed or pending message always wins over the clipboard
+  const text = await readClipboard();
+  if (text === null) {
+    status("Tap 📋 Paste once so Chrome can ask for clipboard permission.");
+    return;
+  }
+  if (text.length < MIN_CLIP_CHARS || hashText(text) === store.get("lastClip")) return;  // nothing new
+  $("msg").value = text;
+  $("msg-label").textContent = "Copied message (you can edit it)";
+  if (!cachedToken()) {
+    // Google sign-in must be confirmed by a tap (about once an hour).
+    store.set("lastClip", hashText(text));
+    status("Copied text is ready. Tap Send (Google asks you to confirm about once an hour).");
+    return;
+  }
+  let left = 3;
+  const tick = () => {
+    if (left <= 0) { cancelAuto(); onSend(); return; }
+    $("countdown-text").textContent = `Sending copied text in ${left}…`;
+    left -= 1;
+    autoTimer = setTimeout(tick, 1000);
+  };
+  $("countdown").hidden = false;
+  tick();
+}
+
+async function onPaste() {
+  const text = await readClipboard();
+  if (text === null) { status("Chrome didn't allow reading the clipboard. Long-press the box and choose Paste.", "err"); return; }
+  if (!text) { status("The clipboard is empty."); return; }
+  $("msg").value = text;
+  store.set("draft", text);
+  status("");
+}
+
+function setCopyMode(on, check = true) {
+  store.set("copyMode", !!on);
+  $("copymode").checked = !!on;
+  $("copyhelp").hidden = !on;
+  if (!on) cancelAuto();
+  else if (check) checkClipboard();
+}
+
 // ------------------------------------------------------------------ actions
 async function onSend() {
   const text = $("msg").value.trim();
@@ -203,6 +276,7 @@ async function onSend() {
     const token = await getToken(true);  // a sign-in pop-up only the first time (and about once an hour)
     await flushQueue(token);
     if (text) await addToTasks(token, text);
+    if (text) store.set("lastClip", hashText(text));
     store.del("draft");
     done("Sent to D-Day", "Your PC will pick it up within a minute (when it's on) and show it in the D-Day inbox.");
   } catch (e) {
@@ -249,7 +323,12 @@ function start() {
     try { if (t) { await loadGis(); google.accounts.oauth2.revoke(t, () => {}); } } catch { /* offline */ }
     status("Signed out.", "ok");
   });
-  $("msg").addEventListener("input", () => store.set("draft", $("msg").value));
+  $("msg").addEventListener("input", () => { store.set("draft", $("msg").value); cancelAuto(); });
+  $("paste").addEventListener("click", onPaste);
+  $("copymode").addEventListener("change", (e) => setCopyMode(e.target.checked));
+  $("cancel-auto").addEventListener("click", () => cancelAuto("Cancelled. Tap Send when you're ready."));
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) checkClipboard(); });
+  window.addEventListener("focus", () => checkClipboard());
 
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 
@@ -265,6 +344,8 @@ function start() {
   show("v-compose");
   showQueue();
   trySilentFlush();
+  setCopyMode(store.get("copyMode"), false);
+  if (!shared) checkClipboard();  // a shared message always wins over the clipboard
 }
 
 start();

@@ -29,6 +29,16 @@
     <section id="v-compose" hidden>
       <label for="msg" id="msg-label">Message</label>
       <textarea id="msg" rows="8" placeholder="Paste or share a message with a deadline"></textarea>
+      <div class="row">
+        <button id="paste" type="button">📋 Paste</button>
+        <label class="switch"><input id="copymode" type="checkbox" role="switch"><span class="track"><span class="knob"></span></span>
+          <span>Copy mode</span></label>
+      </div>
+      <p id="copyhelp" class="muted small" hidden>On: copy a message (e.g. in WhatsApp), then open D-Day. The copied text is sent automatically.</p>
+      <div id="countdown" class="countdown" hidden>
+        <span id="countdown-text"></span>
+        <button id="cancel-auto" type="button" class="link">Cancel</button>
+      </div>
       <button id="send" class="primary">Send to D-Day</button>
       <p id="status" class="status" role="status" aria-live="polite"></p>
       <p id="queue" class="muted small" hidden></p>
@@ -47,7 +57,8 @@
       <summary>How to use</summary>
       <ol>
         <li>Install: in Chrome's ⋮ menu choose <b>Add to Home screen</b> / <b>Install app</b>.</li>
-        <li>In WhatsApp (or SMS, Gmail…), long-press a message → <b>Share</b> → <b>D-Day</b> → <b>Send</b>.</li>
+        <li>In SMS, Gmail and most apps: long-press or select text → <b>Share</b> → <b>D-Day</b> → <b>Send</b>.</li>
+        <li>WhatsApp text messages can't be shared to other apps: turn on <b>Copy mode</b>, copy the message, then open D-Day. It sends the copied text by itself.</li>
         <li>It goes to your "D-Day" list in Google Tasks; your PC reads it with its local model. Nothing is added to your calendar until you confirm on the PC.</li>
       </ol>
       <p>Google sign-in is used only to add the message to your own Google Tasks.
