@@ -13,7 +13,7 @@ DEFAULTS: Dict[str, Any] = {
     "untimed_deadline": "all_day",   # or "end_of_day"
     "auto_resolve": True,
     "share_client_id": "",                                    # Web OAuth client used by the phone share app
-    "share_app_url": "https://mohitahujaa.github.io/dday-share/",
+    "share_app_url": "https://mohitahujaa.github.io/D-Day/",
 }
 
 

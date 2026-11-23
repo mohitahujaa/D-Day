@@ -471,7 +471,7 @@ def test_share_setup_link_and_qr(app_client):
     assert bad.status_code == 400
     r = call(app_client, "post", "/api/share", {"share_client_id": CID})
     info = r.get_json()
-    assert info["setup_url"] == f"https://mohitahujaa.github.io/dday-share/#setup={CID}"
+    assert info["setup_url"] == f"https://mohitahujaa.github.io/D-Day/#setup={CID}"
     assert info["app_origin"] == "https://mohitahujaa.github.io"
     qr = app_client.get("/api/share/qr.svg", headers=APP_HEADERS, base_url="http://127.0.0.1:8765")
     assert qr.status_code == 200 and qr.mimetype == "image/svg+xml" and b"<svg" in qr.data

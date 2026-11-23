@@ -81,8 +81,8 @@ need it). To give it its own window and taskbar icon: Chrome ⋮ → *Cast, save
 in Android's Share menu as **D-Day**. Long-press a message → Share → D-Day → Send, and it lands in your "D-Day"
 Google Tasks list from anywhere (queued on the phone if you're offline). Setup, once:
 1. Do the Google Tasks setup below.
-2. Publish the app: double-click `publish-share-app.bat` (creates the public repo `mohitahujaa/dday-share` and turns
-   on GitHub Pages; it holds only the static page, no secrets).
+2. The app is published automatically to GitHub Pages at `https://mohitahujaa.github.io/D-Day/` by the
+   `Publish share app` workflow (`.github/workflows/pages.yml`), whenever `share_app/` changes on `main`.
 3. Google Cloud Console → Credentials → Create credentials → OAuth client ID → **Web application**, with
    **Authorized JavaScript origins** = `https://mohitahujaa.github.io`. Paste its Client ID into the dashboard
    (Settings → Share from phone).
@@ -291,7 +291,7 @@ python extractor.py            # live model demo (needs Ollama)
 | `app/`, `app_api.py` | Local dashboard (installable web page) and its API |
 | `inbox.py` | Local inbox (SQLite), background extraction worker, save-on-confirm |
 | `gtasks_source.py` | Phone inbox via a "D-Day" Google Tasks list |
-| `share_app/`, `publish-share-app.bat` | Android share-sheet app (GitHub Pages) that adds shared messages to that list |
+| `share_app/`, `.github/workflows/pages.yml` | Android share-sheet app, published to GitHub Pages, that adds shared messages to that list |
 | `telegram_bot.py` | Optional private Telegram bot (long polling, pairing code, Save button) |
 | `settings_store.py`, `autostart.py` | Preferences; start with Windows |
 | `extension/` | MV3 extension: context menu, review window, popup |
