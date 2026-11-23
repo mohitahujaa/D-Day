@@ -1,0 +1,32 @@
+# ---- Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# ---- Secrets: never commit OAuth client files or tokens
+credentials/*
+!credentials/README.md
+client_secret*.json
+*token*.bin
+telegram.bin
+*.pem
+.env
+
+# ---- Generated per machine (written by native_host/install.py)
+native_host/dday_host.bat
+native_host/com.dday.host.json
+
+# ---- Local data and outputs (the service keeps its data in %LOCALAPPDATA%\D-Day)
+eval/results/
+*.db
+*.log
+*.tmp
+
+# ---- Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

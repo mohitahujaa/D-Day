@@ -1,0 +1,9 @@
+# Runtime
+flask>=2.3
+requests>=2.31
+python-dateutil>=2.8
+tzdata>=2024.1        # IANA timezone data for zoneinfo on Windows
+waitress>=3.0         # production-grade local server (the service runs all day)
+
+# Tests
+pytest>=7
