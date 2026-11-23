@@ -1,0 +1,14 @@
+{
+  "name": "D-Day",
+  "short_name": "D-Day",
+  "description": "Your deadlines from messages, saved to Google Calendar. Runs locally.",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a73e8",
+  "icons": [
+    { "src": "/app/icons/icon48.png", "sizes": "48x48", "type": "image/png" },
+    { "src": "/app/icons/icon128.png", "sizes": "128x128", "type": "image/png" }
+  ]
+}

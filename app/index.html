@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-Day</title>
+  <link rel="manifest" href="/app/manifest.webmanifest">
+  <link rel="icon" href="/app/icons/icon32.png">
+  <meta name="theme-color" content="#1a73e8">
+  <link rel="stylesheet" href="/app/base.css">
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img src="/app/icons/icon32.png" alt="" width="22" height="22"><h1>D-Day</h1></div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="inbox" aria-selected="true">Inbox <span id="inbox-badge" class="count" hidden></span></button>
+      <button role="tab" data-tab="upcoming">Upcoming</button>
+      <button role="tab" data-tab="history">History</button>
+      <button role="tab" data-tab="settings">Settings</button>
+    </nav>
+    <div id="status-dots" class="status-dots" aria-live="polite"></div>
+  </header>
+
+  <main class="page">
+    <!-- Inbox -->
+    <section id="tab-inbox" class="tab">
+      <div class="card paste">
+        <label for="paste-text">Paste a message (or add it to the "D-Day" list in Google Tasks on your phone)</label>
+        <textarea id="paste-text" rows="3" placeholder="e.g. Submit the DBMS assignment by Friday at 11:59 PM"></textarea>
+        <div class="actions"><button id="paste-add" class="primary">Add to inbox</button><span id="paste-msg" class="small muted"></span></div>
+      </div>
+      <div id="inbox-list"></div>
+      <p id="inbox-empty" class="muted center" hidden>Inbox is empty. Forward a message to your Telegram bot or paste one above.</p>
+    </section>
+
+    <!-- Upcoming -->
+    <section id="tab-upcoming" class="tab" hidden>
+      <div id="upcoming-list"></div>
+    </section>
+
+    <!-- History -->
+    <section id="tab-history" class="tab" hidden>
+      <div id="history-list"></div>
+    </section>
+
+    <!-- Settings -->
+    <section id="tab-settings" class="tab" hidden>
+      <div class="card">
+        <h2>Share from phone (WhatsApp → D-Day)</h2>
+        <div id="share-box"></div>
+      </div>
+      <div class="card">
+        <h2>Phone (Google Tasks)</h2>
+        <div id="gt-box"></div>
+      </div>
+      <details class="card">
+        <summary><strong>Phone (Telegram)</strong> <span class="small muted">optional</span></summary>
+        <div id="tg-box"></div>
+      </details>
+      <div class="card">
+        <h2>Google Calendar</h2>
+        <div id="google-box"></div>
+      </div>
+      <div class="card">
+        <h2>Preferences</h2>
+        <label for="pref-name">Your name (helps decide which tasks are yours)</label>
+        <input id="pref-name" maxlength="60" placeholder="e.g. Mohit">
+        <label for="pref-tz">Timezone</label>
+        <input id="pref-tz" list="tz-list" placeholder="Asia/Kolkata">
+        <datalist id="tz-list"></datalist>
+        <label for="pref-untimed">Deadlines without a time</label>
+        <select id="pref-untimed">
+          <option value="all_day">All-day event (recommended)</option>
+          <option value="end_of_day">Timed at 23:59</option>
+        </select>
+        <label class="inline"><input id="pref-auto" type="checkbox">Pick the most likely date automatically</label>
+        <label class="inline"><input id="pref-startup" type="checkbox">Start D-Day when Windows starts (needed to receive phone messages)</label>
+        <div class="actions"><button id="pref-save" class="primary">Save preferences</button><span id="pref-msg" class="small muted"></span></div>
+      </div>
+      <p class="muted small">
+        D-Day runs on this computer. Messages are read by the local model (Ollama); only events you confirm are sent
+        to Google Calendar. Messages you forward to the Telegram bot pass through Telegram.
+        Tip: in Chrome, ⋮ → Cast, save and share → Install page as app, to open D-Day in its own window.
+      </p>
+    </section>
+  </main>
+  <script type="module" src="/app/app.js"></script>
+</body>
+</html>
