@@ -1,0 +1,194 @@
+{
+  "reference_time": "2026-11-19T10:00:00+05:30",
+  "_comment": "Held-out messages written after tuning on cases.json, to check the improvements generalise. Same format.",
+  "cases": [
+    {
+      "id": "h_whatsapp_lab",
+      "text": "Bro the physics lab file has to be submitted day after tomorrow before 1. Sir was very strict about it",
+      "expect": [
+        {
+          "kw": [
+            "physics",
+            "lab"
+          ],
+          "dates": [
+            "2026-11-21"
+          ],
+          "time": "13:00",
+          "area": "college"
+        }
+      ]
+    },
+    {
+      "id": "h_classroom_post",
+      "text": "Posted Nov 18\nDear all, the Software Engineering class test will be held tomorrow in the 3rd period. Syllabus: Units 1 and 2.",
+      "expect": [
+        {
+          "kw": [
+            "software",
+            "test"
+          ],
+          "dates": [
+            "2026-11-19"
+          ],
+          "time": null,
+          "area": "college"
+        }
+      ]
+    },
+    {
+      "id": "h_rescheduled_meeting",
+      "text": "Hi team, the client call originally on Monday has been rescheduled to Thursday 26th Nov at 4:30 PM (IST). Zoom link: https://zoom.us/j/123456789",
+      "expect": [
+        {
+          "kw": [
+            "client",
+            "call"
+          ],
+          "dates": [
+            "2026-11-26"
+          ],
+          "time": "16:30",
+          "location": "zoom.us",
+          "area": "work"
+        }
+      ]
+    },
+    {
+      "id": "h_fee_notice",
+      "text": "NOTICE\nThe last date for payment of semester fees without fine is 30.11.2026. After this date a fine of Rs 50 per day will be charged.",
+      "expect": [
+        {
+          "kw": [
+            "fee",
+            "pay"
+          ],
+          "dates": [
+            "2026-11-30"
+          ],
+          "time": null,
+          "area": "college"
+        }
+      ]
+    },
+    {
+      "id": "h_two_exams",
+      "text": "Exam schedule: Mathematics-III on 1st Dec (10:00-13:00) and Digital Electronics on 4th Dec (14:00-17:00). Report 15 minutes early to Exam Hall 2.",
+      "expect": [
+        {
+          "kw": [
+            "math"
+          ],
+          "dates": [
+            "2026-12-01"
+          ],
+          "time": "10:00",
+          "end_time": "13:00",
+          "area": "college"
+        },
+        {
+          "kw": [
+            "digital",
+            "electronics"
+          ],
+          "dates": [
+            "2026-12-04"
+          ],
+          "time": "14:00",
+          "end_time": "17:00",
+          "area": "college"
+        }
+      ]
+    },
+    {
+      "id": "h_promo_noise",
+      "text": "Flash sale! 50% off on all courses until midnight tonight. Use code LEARN50. Unsubscribe anytime.",
+      "expect": []
+    },
+    {
+      "id": "h_next_week_day",
+      "text": "The guest talk on AI ethics is on Tuesday next week at 11 am in the seminar hall. Attendance is compulsory.",
+      "expect": [
+        {
+          "kw": [
+            "talk",
+            "ethics",
+            "guest"
+          ],
+          "dates": [
+            "2026-11-24"
+          ],
+          "time": "11:00",
+          "area": "college"
+        }
+      ]
+    },
+    {
+      "id": "h_in_two_weeks",
+      "text": "Your mini project synopsis should be ready in two weeks. We'll review it in class.",
+      "expect": [
+        {
+          "kw": [
+            "synopsis",
+            "project"
+          ],
+          "dates": [
+            "2026-12-03"
+          ],
+          "time": null,
+          "area": "college"
+        }
+      ]
+    },
+    {
+      "id": "h_other_person",
+      "text": "Rahul, please book the auditorium for Friday. Everyone else: submit your slides to me by Thursday 8 pm.",
+      "expect": [
+        {
+          "kw": [
+            "slides"
+          ],
+          "dates": [
+            "2026-11-19",
+            "2026-11-26"
+          ],
+          "time": "20:00"
+        }
+      ],
+      "optional": [
+        {
+          "kw": [
+            "auditorium",
+            "book"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h_month_first_words",
+      "text": "Reminder: Hackathon kicks off on December 5th at 9:00 AM and submissions close on December 6th at 9:00 PM.",
+      "expect": [
+        {
+          "kw": [
+            "hackathon",
+            "kick"
+          ],
+          "dates": [
+            "2026-12-05"
+          ],
+          "time": "09:00"
+        },
+        {
+          "kw": [
+            "submission",
+            "submit"
+          ],
+          "dates": [
+            "2026-12-06"
+          ],
+          "time": "21:00"
+        }
+      ]
+    }
+  ]
+}
