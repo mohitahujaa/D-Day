@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D-Day</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>body { width: 340px; } main { padding: 10px 12px; } h2 { font-size: 13px; margin: 14px 0 4px; }</style>
+</head>
+<body>
+  <header>
+    <h1>D-Day</h1>
+    <label class="switch" title="Turn D-Day on or off">
+      <span id="power-label" class="small muted">…</span>
+      <input type="checkbox" id="power" role="switch" aria-label="D-Day on or off">
+      <span class="track"><span class="knob"></span></span>
+    </label>
+  </header>
+  <div id="power-msg" class="small" hidden></div>
+  <main>
+    <div id="status"></div>
+    <div id="google-actions" class="actions"></div>
+    <div class="actions">
+      <button id="open-dashboard" class="primary">Open dashboard</button>
+      <button id="refresh" class="link small">Refresh status</button>
+    </div>
+
+    <h2>Upcoming tasks</h2>
+    <div id="upcoming" class="small muted">Loading…</div>
+    <div class="actions">
+      <a href="https://calendar.google.com/calendar/r" target="_blank" rel="noopener noreferrer">Open Google Calendar ↗</a>
+    </div>
+
+    <h2>Unsaved selections</h2>
+    <div id="drafts" class="small muted">None</div>
+    <div class="actions"><button id="paste">Paste text manually…</button></div>
+
+    <h2>Settings</h2>
+    <label for="user-name">Your name (optional; helps decide which tasks are yours)</label>
+    <input id="user-name" maxlength="60" placeholder="e.g. Mohit">
+    <label class="inline"><input id="auto-resolve" type="checkbox">Pick the most likely date automatically (you can still change it)</label>
+    <label for="timezone">Timezone</label>
+    <input id="timezone" list="tz-list" placeholder="Asia/Kolkata">
+    <datalist id="tz-list"></datalist>
+    <button id="use-browser-tz" class="link small"></button>
+
+    <label for="untimed">Deadlines without a time</label>
+    <select id="untimed">
+      <option value="all_day">All-day event (recommended)</option>
+      <option value="end_of_day">Timed at 23:59</option>
+    </select>
+
+    <label for="deadline-mode">Timed deadlines</label>
+    <select id="deadline-mode">
+      <option value="ends_at_due">Block that ends at the due time</option>
+      <option value="starts_at_due">Block that starts at the due time</option>
+    </select>
+
+    <div class="row">
+      <div><label for="deadline-dur">Deadline block (min)</label><input id="deadline-dur" type="number" min="1" max="1440"></div>
+      <div><label for="event-dur">Event length (min)</label><input id="event-dur" type="number" min="1" max="1440"></div>
+    </div>
+    <div class="row">
+      <div><label for="rem-timed">Reminders, timed</label><input id="rem-timed" placeholder="60, 1440"></div>
+      <div><label for="rem-allday">Reminders, all-day</label><input id="rem-allday" placeholder="900"></div>
+    </div>
+    <label class="inline"><input id="include-source" type="checkbox">Include source excerpt by default</label>
+    <label for="port">Local service port</label>
+    <input id="port" type="number" min="1024" max="65535">
+    <div class="actions"><button id="save-settings" class="primary">Save settings</button><span id="saved-msg" class="small muted"></span></div>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-Day: Review</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>D-Day</h1>
+    <span id="tz" class="muted small"></span>
+  </header>
+  <main>
+    <details id="source-box">
+      <summary>Selected text (<span id="source-len">0</span> chars, processed locally)</summary>
+      <textarea id="source" rows="6" aria-label="Selected text"></textarea>
+      <div class="actions">
+        <button id="reanalyse">Analyse again</button>
+        <span id="truncated" class="muted small" hidden>Selection was truncated to 20,000 characters.</span>
+      </div>
+    </details>
+
+    <section id="state" aria-live="polite"></section>
+    <section id="tasks"></section>
+
+    <div class="footer">
+      <button id="add-manual" class="link">+ Add a task manually</button>
+    </div>
+    <div class="sticky-bar">
+      <button id="save-all" class="primary" hidden>Save to Google Calendar</button>
+      <button id="cancel">Cancel</button>
+    </div>
+    <p class="muted small">
+      Your selected text never leaves this computer: it is analysed by Ollama on your machine.
+      When you press Save, only the title, date/time, timezone, description and reminders shown
+      on that card are sent to Google Calendar.
+    </p>
+  </main>
+  <script type="module" src="review.js"></script>
+</body>
+</html>
